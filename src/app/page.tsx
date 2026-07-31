@@ -11,10 +11,9 @@ import { Scene4StoryUs } from "@/components/scenes/Scene4StoryUs";
 import { Scene5Carousel } from "@/components/scenes/Scene5Carousel";
 import { Scene6Reasons } from "@/components/scenes/Scene6Reasons";
 import { Scene8Video } from "@/components/scenes/Scene8Video";
-import { Scene9Quiz } from "@/components/scenes/Scene9Quiz";
 import { Scene10Letter } from "@/components/scenes/Scene10Letter";
 
-const TOTAL_SCENES = 9;
+const TOTAL_SCENES = 8;
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
@@ -43,7 +42,6 @@ export default function StoryContainer() {
     <Scene5Carousel key="s5" onNext={handleNext} />,
     <Scene6Reasons key="s6" onNext={handleNext} />,
     <Scene8Video key="s8" onNext={handleNext} />,
-    <Scene9Quiz key="s9" onNext={handleNext} />,
     <Scene10Letter key="s10" onNext={handleNext} />,
   ];
 
