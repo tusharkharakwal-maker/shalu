@@ -45,6 +45,14 @@ export function Scene5Carousel({ onNext }: SceneProps) {
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
+  useEffect(() => {
+    if (!emblaApi) return;
+    const intervalId = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [emblaApi]);
+
   return (
     <motion.div
       key="scene-5"
