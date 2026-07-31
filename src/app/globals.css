@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-quicksand), "Arial", sans-serif;
+  --font-script: var(--font-caveat), "cursive";
+  
+  --color-primary: #ec4899;
+  --color-primary-light: #fbcfe8;
+  --color-accent: #c084fc;
+}
+
+body {
+  /* No custom background here, handled in layout.tsx to support the gradient container */
+  color: #1f2937;
+  font-family: var(--font-sans);
+}
+
+/* Base custom styles if needed */
+.glass-panel {
+  @apply bg-white/60 backdrop-blur-md shadow-xl border border-white/40;
+}
