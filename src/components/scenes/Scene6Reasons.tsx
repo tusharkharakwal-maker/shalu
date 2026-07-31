@@ -93,10 +93,9 @@ export function Scene6Reasons({ onNext }: SceneProps) {
                   finishPercent={40}
                   brushSize={25}
                 >
-                  {/* Reason content (Revealed) */}
-                  <div className="flex flex-col items-center justify-center gap-2 p-2 w-full h-full bg-white">
-                    <div className="relative w-16 h-16 flex items-center justify-center">
-                      <Image src={reason.image} alt="sticker" fill sizes="64px" className="object-contain drop-shadow-sm" />
+                  <div className="flex flex-col items-center justify-center gap-1 p-2 w-full h-full bg-white">
+                    <div className="relative w-24 h-24 flex items-center justify-center">
+                      <Image src={reason.image} alt="sticker" fill sizes="96px" className="object-contain drop-shadow-sm" />
                     </div>
                     <p className="text-[10px] font-bold text-slate-700 leading-tight">
                       {reason.text}
