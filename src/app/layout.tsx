@@ -28,7 +28,7 @@ export default function RootLayout({
       className={`${caveat.variable} ${quicksand.variable} h-[100dvh] antialiased overflow-hidden`}
     >
       <body className="h-full flex flex-col bg-dotted text-indigo-950 font-sans p-4 sm:p-8 md:p-12 items-center justify-center">
-        <main className="w-full max-w-[500px] aspect-[4/5] max-h-[850px] h-full relative bg-white rounded-[32px] sm:rounded-[40px] shadow-2xl shadow-purple-500/10 overflow-hidden flex flex-col">
+        <main className="w-full max-w-[500px] aspect-[4/5] max-h-[850px] h-full relative bg-[#faf9fc] rounded-[32px] sm:rounded-[40px] shadow-2xl shadow-purple-500/10 overflow-hidden flex flex-col">
           
           {/* Decorative Corner Flowers */}
           <div className="absolute top-[-10px] left-[-10px] z-50 pointer-events-none opacity-90 scale-75 origin-top-left">
