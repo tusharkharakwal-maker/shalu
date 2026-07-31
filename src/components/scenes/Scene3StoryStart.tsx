@@ -41,7 +41,7 @@ export function Scene3StoryStart({ onNext }: SceneProps) {
         </motion.div>
 
         <motion.h2 variants={itemVariants} className="text-3xl font-bold text-slate-800 mb-6 leading-tight">
-          From coffee runs to all our random dates ☕
+          From all our chai sutta runs to all our random dates ☕
         </motion.h2>
 
         <motion.div variants={itemVariants} className="w-full aspect-[4/3] relative rounded-xl overflow-hidden shadow-lg mb-6 bg-pink-50 border-4 border-white">
