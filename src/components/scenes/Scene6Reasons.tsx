@@ -132,7 +132,7 @@ export function Scene6Reasons({ onNext }: SceneProps) {
           className="transition-opacity duration-300"
         >
           <CtaButton onClick={onNext} disabled={!allScratched}>
-            {allScratched ? "A little nickname corner" : "Scratch all to continue"}
+            {allScratched ? "continue through" : "Scratch all to continue"}
           </CtaButton>
         </motion.div>
       </motion.div>
