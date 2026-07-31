@@ -94,6 +94,7 @@ export function MusicPlayer() {
           alt="Album Art" 
           fill 
           className="object-cover" 
+          unoptimized={true}
         />
       </div>
       
