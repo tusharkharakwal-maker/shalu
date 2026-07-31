@@ -12,12 +12,12 @@ interface SceneProps {
 }
 
 const reasons = [
-  { image: "/cat1.png", text: "you feel like home" },
-  { image: "/cat2.png", text: "your laugh is my favourite sound" },
-  { image: "/cat3.png", text: "you make ordinary days magic" },
-  { image: "/cat4.png", text: "you're my calm and my spark" },
-  { image: "/cat5.png", text: "you make me want to be better" },
-  { image: "/cat6.png", text: "it's you. it's always you." },
+  { image: "/cat1.png", text: "you feel like home", scale: "scale-100" },
+  { image: "/cat2.png", text: "your laugh is my favourite sound", scale: "scale-[2]" },
+  { image: "/cat3.png", text: "you make ordinary days magic", scale: "scale-[2.5]" },
+  { image: "/cat4.png", text: "you're my calm and my spark", scale: "scale-[1.8]" },
+  { image: "/cat5.png", text: "you make me want to be better", scale: "scale-[1.8]" },
+  { image: "/cat6.png", text: "it's you. it's always you.", scale: "scale-[1.8]" },
 ];
 
 const containerVariants: Variants = {
@@ -95,7 +95,7 @@ export function Scene6Reasons({ onNext }: SceneProps) {
                 >
                   <div className="flex flex-col items-center justify-center gap-1 p-2 w-full h-full bg-white">
                     <div className="relative w-24 h-24 flex items-center justify-center">
-                      <Image src={reason.image} alt="sticker" fill sizes="96px" className="object-contain drop-shadow-sm" />
+                      <Image src={reason.image} alt="sticker" fill sizes="96px" className={`object-contain drop-shadow-sm ${reason.scale || ""}`} />
                     </div>
                     <p className="text-[10px] font-bold text-slate-700 leading-tight">
                       {reason.text}
