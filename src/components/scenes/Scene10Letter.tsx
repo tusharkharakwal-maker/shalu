@@ -35,6 +35,8 @@ export function Scene10Letter({ onNext }: SceneProps) {
     "",
     "Thank you for being the calm in my chaos even though sometimes you shout like an elephant who lost it's mind lol. For the late-night talks, the terrible puns, and the way we get back together after all those silly fights.",
     "",
+    "Thank you for being their with me whenever i need you and specially now when the times are probably hard for me. THANK YOU!!!",
+    "",
     "I hope today feels soft and warm and completely yours. I hope you feel even a fraction of how much you're adored. and I hope you always know — even on the days I forget to say it — I choose you, every single time.",
     "",
     "I love you more than words can say.",
