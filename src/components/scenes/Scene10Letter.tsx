@@ -33,9 +33,11 @@ export function Scene10Letter({ onNext }: SceneProps) {
   const letterLines = [
     "I'm better with actions than with words, so I made you a little page instead — a song, our pictures, and a few things I mean with my whole heart.",
     "",
-    "thank you for being the calm in my chaos and the spark in my ordinary. for the late-night talks, the terrible puns, and the way you always know when I need a hug before I do.",
+    "Thank you for being the calm in my chaos even though sometimes you shout like an elephant who lost it's mind lol. For the late-night talks, the terrible puns, and the way we get back together after all those silly fights.",
     "",
     "I hope today feels soft and warm and completely yours. I hope you feel even a fraction of how much you're adored. and I hope you always know — even on the days I forget to say it — I choose you, every single time.",
+    "",
+    "I love you more than words can say.",
   ];
 
   return (
