@@ -90,7 +90,7 @@ export function MusicPlayer() {
     >
       <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-pink-50 flex-shrink-0 border border-purple-50 shadow-sm">
         <Image 
-          src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/69/9c/b5/699cb5d6-115c-ff73-9d26-e57ea4350d72/887828031795.png/100x100bb.jpg" 
+          src="/media/album-art.jpg" 
           alt="Album Art" 
           fill 
           className="object-cover" 
