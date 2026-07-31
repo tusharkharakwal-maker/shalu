@@ -47,11 +47,12 @@ export function Scene3StoryStart({ onNext }: SceneProps) {
         <motion.div variants={itemVariants} className="w-full aspect-[4/3] relative rounded-xl overflow-hidden shadow-lg mb-6 bg-pink-50 border-4 border-white">
           <WashiTape color="purple" />
           <Image
-            src="/media/photo-02.jpg"
+            src="/media/scene3.png"
             alt="Random dates"
             fill
             className="object-cover"
             sizes="(max-width: 430px) 100vw, 400px"
+            unoptimized={true}
             onError={(e) => e.currentTarget.style.display = 'none'}
           />
           <div className="absolute inset-0 flex items-center justify-center text-xs text-pink-300 -z-10 bg-pink-100">
