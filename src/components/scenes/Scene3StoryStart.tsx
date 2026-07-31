@@ -25,12 +25,12 @@ const itemVariants: Variants = {
 
 export function Scene3StoryStart({ onNext }: SceneProps) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center overflow-y-auto">
+    <div className="w-full h-full overflow-y-auto no-scrollbar">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="w-full flex flex-col items-center"
+        className="min-h-full w-full flex flex-col items-center justify-center p-8 py-14 text-center"
       >
         <motion.div variants={itemVariants}>
           <PillTag>♡ WHERE IT STARTED</PillTag>

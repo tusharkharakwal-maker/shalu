@@ -12,14 +12,15 @@ interface SceneProps {
 
 export function Scene2Welcome({ onNext }: SceneProps) {
   return (
-    <motion.div
-      key="scene-2"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.8 }}
-      className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
-    >
+    <div className="w-full h-full overflow-y-auto no-scrollbar">
+      <motion.div
+        key="scene-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.8 }}
+        className="min-h-full w-full flex flex-col items-center justify-center p-6 py-14 text-center"
+      >
       <div className="w-24 h-24 mb-6 relative rounded-full p-1 bg-gradient-to-tr from-pink-300 to-purple-300 shadow-lg shadow-purple-200">
         <div className="w-full h-full relative rounded-full overflow-hidden border-2 border-white bg-pink-50">
           <Image
@@ -97,6 +98,7 @@ export function Scene2Welcome({ onNext }: SceneProps) {
           SEE OUR LITTLE ALBUM
         </CtaButton>
       </motion.div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
