@@ -53,6 +53,7 @@ export function Scene8Video({ onNext }: SceneProps) {
               controls
               autoPlay
               playsInline
+              muted
               className="w-full h-full object-contain"
               onEnded={() => setIsPlaying(false)}
             />
