@@ -93,6 +93,22 @@ export function ScratchCard({
     return () => observer.disconnect();
   }, [isScratched]);
 
+  // Prevent scrolling on mobile devices when touching the canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const preventScroll = (e: TouchEvent) => {
+      if (!isScratched) {
+        e.preventDefault();
+      }
+    };
+
+    // Must use native event listener to set passive: false
+    canvas.addEventListener("touchmove", preventScroll, { passive: false });
+    return () => canvas.removeEventListener("touchmove", preventScroll);
+  }, [isScratched]);
+
   const scratch = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
     const ctx = ctxRef.current;
