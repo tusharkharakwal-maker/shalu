@@ -16,9 +16,9 @@ interface SceneProps {
 const carouselItems = [
   { image: "/media/carousel-1.jpg", caption: "beautiful as always" },
   { image: "/media/carousel-2.jpg", caption: "our first official twinning" },
-  { image: "/media/carousel-3.jpg", caption: "clumsy you" },
-  { image: "/media/carousel-4.jpg", caption: "just being with you" },
-  { image: "/media/carousel-5.jpg", caption: "us" }
+  { image: "/media/carousel-3.jpg", caption: "just being with you" },
+  { image: "/media/carousel-4.jpg", caption: "clumsy you" },
+  { image: "/media/carousel-5.jpg", caption: "♡us♡" }
 ];
 
 export function Scene5Carousel({ onNext }: SceneProps) {
