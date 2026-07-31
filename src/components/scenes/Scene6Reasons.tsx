@@ -14,7 +14,7 @@ interface SceneProps {
 const reasons = [
   { image: "/cat1.png", text: "you feel like home", scale: "scale-100" },
   { image: "/cat2.png", text: "your laugh is my favourite sound", scale: "scale-[2]" },
-  { image: "/cat3.png", text: "you make ordinary days magic", scale: "scale-[2.5]" },
+  { image: "/cat3.png", text: "you make ordinary days magic", scale: "scale-[3.5]" },
   { image: "/cat4.png", text: "you're my calm and my spark", scale: "scale-[1.8]" },
   { image: "/cat5.png", text: "you make me want to be better", scale: "scale-[1.8]" },
   { image: "/cat6.png", text: "it's you. it's always you.", scale: "scale-[1.8]" },
