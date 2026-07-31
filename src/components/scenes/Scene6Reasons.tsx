@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { PillTag } from "@/components/ui/PillTag";
 import { CtaButton } from "@/components/ui/CtaButton";
-import { Heart, Sparkles, Home, Star, Smile, Flame } from "lucide-react";
+import Image from "next/image";
 import { ScratchCard } from "@/components/ui/ScratchCard";
 
 interface SceneProps {
@@ -12,12 +12,12 @@ interface SceneProps {
 }
 
 const reasons = [
-  { icon: Home, text: "you feel like home", color: "text-rose-400" },
-  { icon: Smile, text: "your laugh is my favourite sound", color: "text-amber-400" },
-  { icon: Sparkles, text: "you make ordinary days magic", color: "text-purple-400" },
-  { icon: Flame, text: "you're my calm and my spark", color: "text-orange-400" },
-  { icon: Star, text: "you make me want to be better", color: "text-blue-400" },
-  { icon: Heart, text: "it's you. it's always you.", color: "text-pink-500" },
+  { image: "/cat1.png", text: "you feel like home" },
+  { image: "/cat2.png", text: "your laugh is my favourite sound" },
+  { image: "/cat3.png", text: "you make ordinary days magic" },
+  { image: "/cat4.png", text: "you're my calm and my spark" },
+  { image: "/cat5.png", text: "you make me want to be better" },
+  { image: "/cat6.png", text: "it's you. it's always you." },
 ];
 
 const containerVariants: Variants = {
@@ -80,7 +80,6 @@ export function Scene6Reasons({ onNext }: SceneProps) {
           className="grid grid-cols-2 gap-3 w-full max-w-[340px] mb-6"
         >
           {reasons.map((reason, index) => {
-            const Icon = reason.icon;
             const isScratched = scratched[index];
             return (
               <motion.div
@@ -95,11 +94,11 @@ export function Scene6Reasons({ onNext }: SceneProps) {
                   brushSize={25}
                 >
                   {/* Reason content (Revealed) */}
-                  <div className="flex flex-col items-center justify-center gap-3 p-4 w-full h-full bg-white">
-                    <div className={`p-2 rounded-full bg-pink-50 ${reason.color}`}>
-                      <Icon size={24} strokeWidth={2.5} />
+                  <div className="flex flex-col items-center justify-center gap-2 p-2 w-full h-full bg-white">
+                    <div className="relative w-16 h-16 flex items-center justify-center">
+                      <Image src={reason.image} alt="sticker" fill sizes="64px" className="object-contain drop-shadow-sm" />
                     </div>
-                    <p className="text-[11px] font-bold text-slate-700 leading-tight">
+                    <p className="text-[10px] font-bold text-slate-700 leading-tight">
                       {reason.text}
                     </p>
                   </div>
