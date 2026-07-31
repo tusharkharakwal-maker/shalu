@@ -21,12 +21,15 @@ export function MusicPlayer() {
 
   const togglePlay = () => {
     if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
+      if (audioRef.current.paused) {
+        audioRef.current.play().catch((err) => {
+          console.error("Audio playback failed:", err);
+          // Fallback if browser blocks autoplay or fails to load
+          setIsPlaying(false);
+        });
       } else {
-        audioRef.current.play();
+        audioRef.current.pause();
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -48,7 +51,6 @@ export function MusicPlayer() {
   };
 
   const handleEnded = () => {
-    setIsPlaying(false);
     setProgress(0);
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
@@ -68,6 +70,8 @@ export function MusicPlayer() {
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
         onEnded={handleEnded}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
       />
       
       <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-pink-50 flex-shrink-0 border border-purple-50 shadow-sm">
