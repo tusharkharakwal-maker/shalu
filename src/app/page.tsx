@@ -14,7 +14,7 @@ import { Scene8Video } from "@/components/scenes/Scene8Video";
 import { Scene10Letter } from "@/components/scenes/Scene10Letter";
 
 const TOTAL_SCENES = 8;
-const SWIPE_CONFIDENCE_THRESHOLD = 10000;
+const SWIPE_CONFIDENCE_THRESHOLD = 15000;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
@@ -53,6 +53,7 @@ export default function StoryContainer() {
       <motion.div
         className="flex-1 relative w-full h-full outline-none"
         drag="x"
+        dragDirectionLock
         dragListener={![4, 5].includes(sceneIndex)}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={1}

@@ -62,7 +62,7 @@ export function Scene10Letter({ onNext }: SceneProps) {
       </motion.div>
 
       {/* Top Divider */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -80,7 +80,7 @@ export function Scene10Letter({ onNext }: SceneProps) {
       </div>
 
       {/* Bottom Divider */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 14 }}
@@ -111,7 +111,7 @@ export function Scene10Letter({ onNext }: SceneProps) {
         <RotateCcw className="w-4 h-4" />
         Read it again
       </motion.button>
-      
+
     </motion.div>
   );
 }
