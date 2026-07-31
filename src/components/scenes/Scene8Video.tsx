@@ -17,7 +17,7 @@ export function Scene8Video({ onNext }: SceneProps) {
     <div className="w-full h-full flex flex-col items-center justify-center p-6 py-10">
       <div className="text-center mb-8">
         <PillTag>♡ RELIVE THIS</PillTag>
-        <h2 className="text-3xl font-bold text-slate-800 mb-2">a little moment, in motion</h2>
+        <h2 className="text-3xl font-bold text-slate-800 mb-2">love the way you feel</h2>
       </div>
 
       <AnimatePresence mode="wait">
@@ -34,7 +34,7 @@ export function Scene8Video({ onNext }: SceneProps) {
             <div className="absolute inset-0 bg-pink-100 flex items-center justify-center text-pink-300 text-sm">
               video-01-thumb.jpg
             </div>
-            
+
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors hover:bg-black/30">
               <div className="w-16 h-16 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center animate-pulse">
                 <Play className="text-white fill-white w-8 h-8 ml-1" />
