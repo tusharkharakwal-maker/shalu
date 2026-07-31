@@ -70,23 +70,6 @@ export function Scene2Welcome({ onNext }: SceneProps) {
 
         <MusicPlayer />
 
-        {/* Decorative Stickers (placeholders) */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6 }}
-          className="flex gap-4 justify-center items-center mb-10 mt-2"
-        >
-          <div className="w-16 h-16 bg-white rounded-xl shadow-sm rotate-[-6deg] p-1 border border-purple-50">
-            <div className="w-full h-full bg-pink-100 rounded-lg"></div>
-          </div>
-          <div className="w-16 h-16 bg-white rounded-xl shadow-sm p-1 border border-purple-50">
-            <div className="w-full h-full bg-pink-100 rounded-lg"></div>
-          </div>
-          <div className="w-16 h-16 bg-white rounded-xl shadow-sm rotate-[6deg] p-1 border border-purple-50">
-            <div className="w-full h-full bg-pink-100 rounded-lg"></div>
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
