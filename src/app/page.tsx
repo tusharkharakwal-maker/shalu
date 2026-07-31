@@ -56,7 +56,8 @@ export default function StoryContainer() {
       {/* Container for swipeable scenes */}
       <motion.div
         className="flex-1 relative w-full h-full outline-none"
-        drag={[4, 5, 6].includes(sceneIndex) ? false : "x"}
+        drag="x"
+        dragListener={![4, 5, 6].includes(sceneIndex)}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={1}
         onDragEnd={(e, { offset, velocity }) => {
