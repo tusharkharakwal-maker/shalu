@@ -31,8 +31,8 @@ export function Scene8Video({ onNext }: SceneProps) {
             onClick={() => setIsPlaying(true)}
           >
             {/* Thumbnail Placeholder */}
-            <div className="absolute inset-0 bg-pink-100 flex items-center justify-center text-pink-300 text-sm">
-              video-01-thumb.jpg
+            <div className="absolute inset-0 bg-pink-100 flex items-center justify-center text-pink-400 font-medium text-lg tracking-wide">
+              Click to Play
             </div>
 
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors hover:bg-black/30">
