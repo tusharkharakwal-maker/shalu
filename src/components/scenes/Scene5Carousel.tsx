@@ -103,6 +103,7 @@ export function Scene5Carousel({ onNext }: SceneProps) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 430px) 80vw, 300px"
+                      unoptimized={true}
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
                   </div>
