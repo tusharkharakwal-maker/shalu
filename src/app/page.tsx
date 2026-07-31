@@ -49,23 +49,9 @@ export default function StoryContainer() {
     <div className="relative w-full h-full flex flex-col">
       <ProgressIndicator currentScene={sceneIndex} totalScenes={TOTAL_SCENES} />
       
-      {/* Container for swipeable scenes */}
+      {/* Container for scenes (swipe disabled) */}
       <motion.div
         className="flex-1 relative w-full h-full outline-none"
-        drag="x"
-        dragDirectionLock
-        dragListener={![4, 5].includes(sceneIndex)}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={1}
-        onDragEnd={(e, { offset, velocity }) => {
-          const swipe = swipePower(offset.x, velocity.x);
-
-          if (swipe < -SWIPE_CONFIDENCE_THRESHOLD) {
-            handleNext();
-          } else if (swipe > SWIPE_CONFIDENCE_THRESHOLD) {
-            handlePrev();
-          }
-        }}
       >
         <AnimatePresence mode="wait">
           <motion.div
