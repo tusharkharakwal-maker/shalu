@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { PillTag } from "@/components/ui/PillTag";
 import { CtaButton } from "@/components/ui/CtaButton";
+import { WashiTape } from "@/components/ui/WashiTape";
 import Image from "next/image";
 
 interface SceneProps {
@@ -43,7 +44,8 @@ export function Scene3StoryStart({ onNext }: SceneProps) {
           The day I asked you to watch Thunderbolts with me 🎬
         </motion.h2>
 
-        <motion.div variants={itemVariants} className="w-full aspect-[4/3] relative rounded-xl overflow-hidden shadow-lg mb-6 bg-pink-50">
+        <motion.div variants={itemVariants} className="w-full aspect-[4/3] relative rounded-xl overflow-hidden shadow-lg mb-6 bg-pink-50 border-4 border-white">
+          <WashiTape color="purple" />
           <Image
             src="/media/photo-02.jpg"
             alt="Movie date"

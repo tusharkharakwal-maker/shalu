@@ -3,99 +3,111 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { PillTag } from "@/components/ui/PillTag";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, Flower2, Heart } from "lucide-react";
 import Image from "next/image";
 
 interface SceneProps {
   onNext: () => void;
 }
 
-const letterText = `I'm not always great with words, so I made you this instead — a little page just for you, for a day that's just about you.
-
-I still think about that evening on 21st May — when I nervously asked if you wanted to watch Thunderbolts with me, and you said yes like it was no big deal. It was a big deal. That was the day everything started, even if neither of us knew it yet.
-
-And then 16th January — the day we stopped being "just friends who watch movies together" and became us. Best decision I've made.
-
-It's been almost a year now, Chodu Mal, and somehow you've become the person I tell everything to — the good days and the hard ones. This year hasn't been easy for me, health-wise, and there were moments I didn't know how to carry. You never once let me carry them alone. That means more than I know how to say — so I'm saying it here instead: thank you. For staying. For showing up. For being you.
-
-You're my Shakalaka Boom Boom, my Chodu, my favourite person to annoy and be annoyed by — and I don't want that to change.
-
-Happy Girlfriend's Day. Here's to a lot more movie dates, more inside jokes, and more us.`;
-
-function TypewriterText({ text }: { text: string }) {
+function TypewriterLine({ text, delay }: { text: string; delay: number }) {
   const [displayedText, setDisplayedText] = useState("");
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayedText(text.slice(0, i));
-      i++;
-      if (i > text.length) clearInterval(interval);
-    }, 20); // ms per character
+    const timeout = setTimeout(() => {
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayedText(text.slice(0, i));
+        i++;
+        if (i > text.length) clearInterval(interval);
+      }, 30);
+      return () => clearInterval(interval);
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
 
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return (
-    <div className="whitespace-pre-wrap text-sm leading-relaxed text-slate-700 text-left">
-      {displayedText}
-    </div>
-  );
+  return <p className="text-slate-700 leading-relaxed min-h-[1.5em]">{displayedText}</p>;
 }
 
 export function Scene10Letter({ onNext }: SceneProps) {
+  const letterLines = [
+    "I'm better with actions than with words, so I made you a little page instead — a song, our pictures, and a few things I mean with my whole heart.",
+    "",
+    "thank you for being the calm in my chaos and the spark in my ordinary. for the late-night talks, the terrible puns, and the way you always know when I need a hug before I do.",
+    "",
+    "I hope today feels soft and warm and completely yours. I hope you feel even a fraction of how much you're adored. and I hope you always know — even on the days I forget to say it — I choose you, every single time.",
+  ];
+
   return (
-    <div className="w-full h-full flex flex-col items-center p-6 py-10 overflow-y-auto no-scrollbar">
-      <PillTag>♡ A LETTER, JUST FOR YOU</PillTag>
-      
-      <div className="w-16 h-16 relative rounded-full overflow-hidden border-2 border-white shadow-md my-4 flex-shrink-0">
-        <Image
-          src="/media/photo-01.jpg"
-          alt="Us"
-          fill
-          className="object-cover"
-          sizes="64px"
-          onError={(e) => e.currentTarget.style.display = 'none'}
-        />
-        <div className="absolute inset-0 bg-pink-100 -z-10" />
+    <motion.div
+      key="scene-10"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="w-full h-full flex flex-col items-center p-6 text-center overflow-y-auto no-scrollbar relative"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="mt-6 mb-4"
+      >
+        <PillTag>A LETTER, JUST FOR YOU</PillTag>
+        <h2 className="font-script text-4xl text-purple-600 mt-2">
+          My darling,
+        </h2>
+      </motion.div>
+
+      {/* Top Divider */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="w-full flex items-center justify-center gap-2 text-purple-300 mb-6 px-4"
+      >
+        <Flower2 size={14} />
+        <div className="flex-1 border-t-2 border-dashed border-purple-200" />
+        <Flower2 size={14} />
+      </motion.div>
+
+      <div className="text-left w-full px-2">
+        {letterLines.map((line, idx) => (
+          <TypewriterLine key={idx} text={line} delay={1 + idx * 2.5} />
+        ))}
       </div>
 
-      <div className="w-full bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-sm border border-white/50 mb-8 mt-4">
-        <h3 className="font-script text-3xl text-primary mb-4 text-left">My darling,</h3>
-        
-        <TypewriterText text={letterText} />
-        
-        <motion.div 
-          className="mt-6 text-right"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: (letterText.length * 0.02) + 0.5 }}
-        >
-          <p className="font-script text-2xl text-primary">Yours, always,</p>
-          <p className="font-script text-3xl text-slate-800 font-bold mt-1">Tushar</p>
-        </motion.div>
-      </div>
+      {/* Bottom Divider */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 14 }}
+        className="w-full flex items-center justify-center gap-2 text-pink-300 mt-8 mb-6 px-4"
+      >
+        <Heart size={14} className="fill-pink-300" />
+        <div className="flex-1 border-t-2 border-dashed border-purple-200" />
+        <Flower2 size={14} />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 14.5 }}
+        className="text-left w-full pl-2 mb-10"
+      >
+        <p className="font-script text-2xl text-purple-600 mb-2">yours, completely,</p>
+        <p className="text-xs font-bold tracking-widest text-purple-400 uppercase">— YOUR PERSON</p>
+      </motion.div>
 
       <motion.button
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: (letterText.length * 0.02) + 1.5 }}
+        transition={{ delay: 15 }}
         onClick={onNext}
-        className="flex items-center gap-2 text-primary font-medium hover:text-pink-600 transition-colors bg-white/50 px-5 py-2.5 rounded-full shadow-sm"
+        className="flex items-center gap-2 text-purple-600 font-medium hover:text-pink-600 transition-colors bg-white/50 px-5 py-2.5 rounded-full shadow-sm border border-purple-100 mb-4"
       >
         <RotateCcw className="w-4 h-4" />
         Read it again
       </motion.button>
       
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: (letterText.length * 0.02) + 2 }}
-        className="mt-4 text-xs text-slate-400 hover:text-slate-600 underline"
-        onClick={() => window.close()}
-      >
-        Close
-      </motion.button>
-    </div>
+    </motion.div>
   );
 }

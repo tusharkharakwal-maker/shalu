@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { PillTag } from "@/components/ui/PillTag";
 import { CtaButton } from "@/components/ui/CtaButton";
+import { WashiTape } from "@/components/ui/WashiTape";
 import Image from "next/image";
 
 interface SceneProps {
@@ -24,29 +25,29 @@ const itemVariants: Variants = {
 
 export function Scene4StoryUs({ onNext }: SceneProps) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center overflow-y-auto">
+    <motion.div
+      key="scene-4"
+      initial="hidden"
+      animate="show"
+      exit={{ opacity: 0, x: -50 }}
+      className="w-full h-full flex flex-col items-center justify-center p-8 text-center"
+    >
       <motion.div
         variants={containerVariants}
-        initial="hidden"
-        animate="show"
         className="w-full flex flex-col items-center"
       >
         <motion.div variants={itemVariants}>
-          <PillTag>♡ THE DAY WE BECAME US</PillTag>
+          <PillTag>THE US NOW</PillTag>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="text-xs font-bold tracking-widest text-slate-400 mb-4">
-          16 . 01 . 2026
-        </motion.div>
-
-        <motion.h2 variants={itemVariants} className="text-3xl font-bold text-slate-800 mb-6 leading-tight">
-          The day we stopped being 'just friends who watch movies together'
-        </motion.h2>
-
-        <motion.div variants={itemVariants} className="w-full aspect-square relative rounded-xl overflow-hidden shadow-lg mb-6 bg-pink-50">
+        <motion.div 
+          variants={itemVariants}
+          className="relative w-full aspect-square rounded-full overflow-hidden shadow-md my-8 bg-purple-50 border-4 border-white"
+        >
+          <WashiTape color="pink" />
           <Image
             src="/media/photo-03.jpg"
-            alt="Becoming us"
+            alt="The Us Now"
             fill
             className="object-cover"
             sizes="(max-width: 430px) 100vw, 400px"
@@ -62,9 +63,9 @@ export function Scene4StoryUs({ onNext }: SceneProps) {
         </motion.p>
 
         <motion.div variants={itemVariants}>
-          <CtaButton onClick={onNext}>Our moments</CtaButton>
+          <CtaButton onClick={onNext}>And then...</CtaButton>
         </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

@@ -4,18 +4,23 @@
   --font-sans: var(--font-quicksand), "Arial", sans-serif;
   --font-script: var(--font-caveat), "cursive";
   
-  --color-primary: #ec4899;
-  --color-primary-light: #fbcfe8;
+  --color-primary: #8b5cf6; /* violet-500 */
+  --color-primary-light: #ddd6fe; /* violet-200 */
   --color-accent: #c084fc;
 }
 
 body {
-  /* No custom background here, handled in layout.tsx to support the gradient container */
-  color: #1f2937;
+  color: #4c1d95; /* Deep purple text for body */
   font-family: var(--font-sans);
+}
+
+.bg-dotted {
+  background-color: #f5f3ff; /* violet-50 */
+  background-image: radial-gradient(#d8b4fe 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
 /* Base custom styles if needed */
 .glass-panel {
-  @apply bg-white/60 backdrop-blur-md shadow-xl border border-white/40;
+  @apply bg-white shadow-xl border border-white/40;
 }

@@ -33,32 +33,47 @@ const cardVariants: Variants = {
 
 export function Scene6Reasons({ onNext }: SceneProps) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 py-10 overflow-y-auto">
-      <div className="text-center mb-8">
-        <PillTag>♡ A LITTLE BOUQUET</PillTag>
-        <h2 className="text-3xl font-bold text-slate-800 mb-2 leading-tight">a bloom for every reason I adore you</h2>
-        <p className="font-script text-2xl text-primary">picked just for you ♡</p>
-      </div>
+    <motion.div
+      key="scene-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, x: -50 }}
+      className="w-full h-full flex flex-col items-center justify-center p-6 text-center"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <PillTag>A LITTLE BOUQUET</PillTag>
+        <h2 className="text-2xl font-bold text-indigo-950 mb-1">
+          a bloom for every reason I adore you
+        </h2>
+        <div className="font-script text-2xl text-purple-500 mb-6">
+          picked just for you ♡
+        </div>
+      </motion.div>
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-2 gap-4 w-full mb-10"
+        animate="show"
+        className="grid grid-cols-2 gap-3 w-full max-w-[340px] mb-8"
       >
-        {reasons.map((reason, idx) => {
+        {reasons.map((reason, index) => {
           const Icon = reason.icon;
           return (
             <motion.div
-              key={idx}
+              key={index}
               variants={cardVariants}
-              className="bg-white/70 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-white/50 flex flex-col items-center text-center gap-3"
+              className="bg-white rounded-2xl p-4 shadow-sm border border-purple-50 flex flex-col items-center justify-center aspect-square gap-3 hover:shadow-md transition-shadow"
             >
-              <div className={`p-3 rounded-full bg-white shadow-sm ${reason.color}`}>
-                <Icon size={24} className="stroke-[2.5]" />
+              <div className={`p-2 rounded-full bg-pink-50 ${reason.color}`}>
+                <Icon size={24} strokeWidth={2.5} />
               </div>
-              <p className="text-sm font-medium text-slate-700 leading-snug">{reason.text}</p>
+              <p className="text-[11px] font-bold text-slate-700 leading-tight">
+                {reason.text}
+              </p>
             </motion.div>
           );
         })}
@@ -71,6 +86,6 @@ export function Scene6Reasons({ onNext }: SceneProps) {
       >
         <CtaButton onClick={onNext}>A little nickname corner</CtaButton>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
