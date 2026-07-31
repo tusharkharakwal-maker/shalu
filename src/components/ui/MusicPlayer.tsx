@@ -19,41 +19,65 @@ export function MusicPlayer() {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
+  useEffect(() => {
+    const audioEl = document.getElementById("bg-music") as HTMLAudioElement;
+    if (audioEl) {
+      audioRef.current = audioEl;
+      
+      // Initialize state based on current audio element
+      setIsPlaying(!audioEl.paused);
+      if (audioEl.duration) {
+        setDuration(formatTime(audioEl.duration));
+        setCurrentTime(formatTime(audioEl.currentTime));
+        setProgress((audioEl.currentTime / audioEl.duration) * 100);
+      }
+
+      const handleTimeUpdate = () => {
+        const current = audioEl.currentTime;
+        const total = audioEl.duration;
+        setCurrentTime(formatTime(current));
+        if (total) {
+          setProgress((current / total) * 100);
+        }
+      };
+
+      const handleLoadedMetadata = () => {
+        setDuration(formatTime(audioEl.duration));
+      };
+
+      const handleEnded = () => {
+        setProgress(0);
+      };
+
+      const handlePlay = () => setIsPlaying(true);
+      const handlePause = () => setIsPlaying(false);
+
+      audioEl.addEventListener("timeupdate", handleTimeUpdate);
+      audioEl.addEventListener("loadedmetadata", handleLoadedMetadata);
+      audioEl.addEventListener("ended", handleEnded);
+      audioEl.addEventListener("play", handlePlay);
+      audioEl.addEventListener("pause", handlePause);
+
+      return () => {
+        audioEl.removeEventListener("timeupdate", handleTimeUpdate);
+        audioEl.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        audioEl.removeEventListener("ended", handleEnded);
+        audioEl.removeEventListener("play", handlePlay);
+        audioEl.removeEventListener("pause", handlePause);
+      };
+    }
+  }, []);
+
   const togglePlay = () => {
     if (audioRef.current) {
       if (audioRef.current.paused) {
         audioRef.current.play().catch((err) => {
           console.error("Audio playback failed:", err);
-          // Fallback if browser blocks autoplay or fails to load
           setIsPlaying(false);
         });
       } else {
         audioRef.current.pause();
       }
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      const current = audioRef.current.currentTime;
-      const total = audioRef.current.duration;
-      setCurrentTime(formatTime(current));
-      if (total) {
-        setProgress((current / total) * 100);
-      }
-    }
-  };
-
-  const handleLoadedMetadata = () => {
-    if (audioRef.current) {
-      setDuration(formatTime(audioRef.current.duration));
-    }
-  };
-
-  const handleEnded = () => {
-    setProgress(0);
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
     }
   };
 
@@ -64,16 +88,6 @@ export function MusicPlayer() {
       transition={{ delay: 1.4 }}
       className="w-full max-w-[280px] mx-auto bg-white rounded-3xl p-3 flex items-center gap-3 shadow-md border border-purple-100 mt-4 mb-6"
     >
-      <audio
-        ref={audioRef}
-        src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/37/be/5f37be34-5729-45b4-8ed1-5b7bd70b8a68/mzaf_17466306567367397119.plus.aac.p.m4a"
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-        onEnded={handleEnded}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-      />
-      
       <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-pink-50 flex-shrink-0 border border-purple-50 shadow-sm">
         <Image 
           src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/69/9c/b5/699cb5d6-115c-ff73-9d26-e57ea4350d72/887828031795.png/100x100bb.jpg" 

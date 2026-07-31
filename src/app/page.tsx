@@ -82,6 +82,11 @@ export default function StoryContainer() {
           </motion.div>
         </AnimatePresence>
       </motion.div>
+      <audio
+        id="bg-music"
+        loop
+        src="https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5f/37/be/5f37be34-5729-45b4-8ed1-5b7bd70b8a68/mzaf_17466306567367397119.plus.aac.p.m4a"
+      />
     </div>
   );
 }
