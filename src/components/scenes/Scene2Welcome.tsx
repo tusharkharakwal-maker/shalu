@@ -24,7 +24,7 @@ export function Scene2Welcome({ onNext }: SceneProps) {
         <div className="w-24 h-24 mb-6 relative rounded-full p-1 bg-gradient-to-tr from-pink-300 to-purple-300 shadow-lg shadow-purple-200">
           <div className="w-full h-full relative rounded-full overflow-hidden border-2 border-white bg-pink-50">
             <Image
-              src="/media/photo-01.jpg"
+              src="/media/scene2-top.jpg"
               alt="Us"
               fill
               className="object-cover"
