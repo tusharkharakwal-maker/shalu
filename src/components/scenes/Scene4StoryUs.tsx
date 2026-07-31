@@ -46,11 +46,12 @@ export function Scene4StoryUs({ onNext }: SceneProps) {
         >
           <WashiTape color="pink" />
           <Image
-            src="/media/photo-03.jpg"
+            src="/media/scene4.jpg"
             alt="The Us Now"
             fill
             className="object-cover"
             sizes="(max-width: 430px) 100vw, 400px"
+            unoptimized={true}
             onError={(e) => e.currentTarget.style.display = 'none'}
           />
           <div className="absolute inset-0 flex items-center justify-center text-xs text-pink-300 -z-10 bg-pink-100">
