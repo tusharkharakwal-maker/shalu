@@ -53,7 +53,7 @@ export function Scene1Cover({ onNext }: SceneProps) {
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut", delay: 0.8 }}
           >
             <h1 className="font-script text-3xl text-primary leading-tight">
-              Happy Girlfriend's Day,<br/>my love
+              Happy Girlfriend's Day,<br/>
             </h1>
           </motion.div>
         </motion.div>
