@@ -190,7 +190,7 @@ export function ScratchCard({
       {/* Content underneath */}
       <div 
         className={`w-full h-full transition-all duration-700 ease-out ${
-          isScratched ? "opacity-100 scale-100 filter-none" : "opacity-40 scale-95 blur-[2px]"
+          isScratched ? "opacity-100 scale-100 filter-none" : "opacity-0 scale-95 blur-[2px]"
         }`}
       >
         {children}
@@ -207,7 +207,7 @@ export function ScratchCard({
         onTouchMove={(e) => handleMove(e.touches[0].clientX, e.touches[0].clientY)}
         onTouchEnd={handleEnd}
         onTouchCancel={handleEnd}
-        className={`absolute inset-0 w-full h-full cursor-crosshair transition-opacity duration-700 ease-in-out z-10 ${
+        className={`absolute inset-0 w-full h-full cursor-crosshair transition-opacity duration-700 ease-in-out z-10 rounded-2xl ${
           isScratched ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       />

@@ -12,9 +12,9 @@ interface SceneProps {
 }
 
 const reasons = [
-  { image: "/cat1.png", text: "you feel like home", scale: "scale-[1.8]" },
+  { image: "/cat1.png", text: "you feel like home", scale: "scale-[1.6]" },
   { image: "/cat2.png", text: "your laugh is my favourite sound", scale: "scale-[1.6]" },
-  { image: "/cat3.png", text: "you make ordinary days magic", scale: "scale-[1.8]" },
+  { image: "/cat3.png", text: "you make ordinary days magic", scale: "scale-[1.6]" },
   { image: "/cat4.png", text: "you're my calm and my spark", scale: "scale-[1.6]" },
   { image: "/cat5.png", text: "you make me want to be better", scale: "scale-[1.5]" },
   { image: "/cat6.png", text: "it's you. it's always you.", scale: "scale-[1.5]" },
@@ -85,7 +85,7 @@ export function Scene6Reasons({ onNext }: SceneProps) {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                className="relative bg-white rounded-2xl shadow-sm border border-purple-50 aspect-square hover:shadow-md transition-shadow overflow-hidden"
+                className="relative bg-white rounded-2xl shadow-sm border border-purple-50 aspect-square hover:shadow-md transition-shadow"
               >
                 <ScratchCard
                   isRevealed={isScratched}
@@ -93,7 +93,7 @@ export function Scene6Reasons({ onNext }: SceneProps) {
                   finishPercent={40}
                   brushSize={25}
                 >
-                  <div className="flex flex-col items-center justify-center gap-1 p-2 w-full h-full bg-white relative">
+                  <div className="flex flex-col items-center justify-center gap-1 p-2 w-full h-full bg-transparent relative">
                     <div className="relative w-24 h-24 flex items-center justify-center">
                       <Image src={reason.image} alt="sticker" fill sizes="96px" className={`object-contain drop-shadow-sm origin-bottom ${reason.scale || ""}`} />
                     </div>
