@@ -53,7 +53,7 @@ export function Scene10Letter({ onNext }: SceneProps) {
       >
         <PillTag>A LETTER, JUST FOR YOU</PillTag>
         <h2 className="font-script text-4xl text-purple-600 mt-2">
-          My darling,
+          Dear Chodu Mal,
         </h2>
       </motion.div>
 
@@ -94,7 +94,7 @@ export function Scene10Letter({ onNext }: SceneProps) {
         className="text-left w-full pl-2 mb-10"
       >
         <p className="font-script text-2xl text-purple-600 mb-2">yours, completely,</p>
-        <p className="text-xs font-bold tracking-widest text-purple-400 uppercase">— YOUR PERSON</p>
+        <p className="text-xs font-bold tracking-widest text-purple-400 uppercase">— TUSHAR</p>
       </motion.div>
 
       <motion.button
