@@ -77,7 +77,7 @@ export function Scene5Carousel({ onNext }: SceneProps) {
       </motion.div>
 
       {/* Carousel Container */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4 }}
@@ -86,15 +86,14 @@ export function Scene5Carousel({ onNext }: SceneProps) {
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex touch-pan-y">
             {carouselItems.map((item, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="relative flex-[0_0_80%] min-w-0 pl-2 pr-2 py-4"
               >
                 {/* Polaroid Card */}
-                <div 
-                  className={`bg-white p-3 pb-8 rounded-xl shadow-md border border-purple-50 transition-transform duration-300 relative ${
-                    index === selectedIndex ? "scale-100 rotate-0 shadow-lg shadow-purple-200/50" : "scale-95 rotate-[-2deg] opacity-70"
-                  }`}
+                <div
+                  className={`bg-white p-3 pb-8 rounded-xl shadow-md border border-purple-50 transition-transform duration-300 relative ${index === selectedIndex ? "scale-100 rotate-0 shadow-lg shadow-purple-200/50" : "scale-95 rotate-[-2deg] opacity-70"
+                    }`}
                 >
                   <WashiTape color={index % 2 === 0 ? "purple" : "pink"} />
                   <div className="relative w-full aspect-[4/5] bg-pink-50 rounded overflow-hidden">
@@ -118,13 +117,13 @@ export function Scene5Carousel({ onNext }: SceneProps) {
 
         {/* Custom Navigation Buttons */}
         <div className="absolute top-1/2 -translate-y-1/2 w-full left-0 flex justify-between px-2 pointer-events-none z-10">
-          <button 
+          <button
             onClick={scrollPrev}
             className="w-10 h-10 rounded-full bg-white/90 backdrop-blur shadow-md flex items-center justify-center text-purple-400 pointer-events-auto border border-purple-50 hover:text-purple-600 transition-colors"
           >
             <ChevronLeft size={24} />
           </button>
-          <button 
+          <button
             onClick={scrollNext}
             className="w-10 h-10 rounded-full bg-white/90 backdrop-blur shadow-md flex items-center justify-center text-purple-400 pointer-events-auto border border-purple-50 hover:text-purple-600 transition-colors"
           >
@@ -134,18 +133,17 @@ export function Scene5Carousel({ onNext }: SceneProps) {
       </motion.div>
 
       {/* Dots */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
         className="flex gap-2 mb-8"
       >
         {carouselItems.map((_, index) => (
-          <div 
+          <div
             key={index}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              index === selectedIndex ? "bg-purple-500 w-4" : "bg-purple-200"
-            }`}
+            className={`w-2 h-2 rounded-full transition-colors ${index === selectedIndex ? "bg-purple-500 w-4" : "bg-purple-200"
+              }`}
           />
         ))}
       </motion.div>
