@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { PillTag } from "@/components/ui/PillTag";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { Heart, Sparkles, Home, Star, Smile, Flame } from "lucide-react";
+import { ScratchCard } from "@/components/ui/ScratchCard";
 
 interface SceneProps {
   onNext: () => void;
@@ -35,7 +36,7 @@ const cardVariants: Variants = {
 export function Scene6Reasons({ onNext }: SceneProps) {
   const [scratched, setScratched] = useState<boolean[]>(Array(reasons.length).fill(false));
 
-  const handleScratch = (index: number) => {
+  const handleScratchComplete = (index: number) => {
     setScratched((prev) => {
       const next = [...prev];
       next[index] = true;
@@ -85,55 +86,24 @@ export function Scene6Reasons({ onNext }: SceneProps) {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                onClick={() => !isScratched && handleScratch(index)}
-                className="relative bg-white rounded-2xl shadow-sm border border-purple-50 flex flex-col items-center justify-center aspect-square gap-3 hover:shadow-md transition-shadow cursor-pointer overflow-hidden select-none"
+                className="relative bg-white rounded-2xl shadow-sm border border-purple-50 aspect-square hover:shadow-md transition-shadow overflow-hidden"
               >
-                {/* Reason content (Revealed) */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
-                  animate={isScratched ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
-                  transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.1 }}
-                  className="flex flex-col items-center justify-center gap-3 p-4 w-full h-full"
+                <ScratchCard
+                  isRevealed={isScratched}
+                  onScratchComplete={() => handleScratchComplete(index)}
+                  finishPercent={40}
+                  brushSize={25}
                 >
-                  <div className={`p-2 rounded-full bg-pink-50 ${reason.color}`}>
-                    <Icon size={24} strokeWidth={2.5} />
+                  {/* Reason content (Revealed) */}
+                  <div className="flex flex-col items-center justify-center gap-3 p-4 w-full h-full bg-white">
+                    <div className={`p-2 rounded-full bg-pink-50 ${reason.color}`}>
+                      <Icon size={24} strokeWidth={2.5} />
+                    </div>
+                    <p className="text-[11px] font-bold text-slate-700 leading-tight">
+                      {reason.text}
+                    </p>
                   </div>
-                  <p className="text-[11px] font-bold text-slate-700 leading-tight">
-                    {reason.text}
-                  </p>
-                </motion.div>
-
-                {/* Scratchable silver/pink cover overlay */}
-                <AnimatePresence>
-                  {!isScratched && (
-                    <motion.div
-                      key="cover"
-                      initial={{ opacity: 1 }}
-                      exit={{
-                        opacity: 0,
-                        scale: 1.15,
-                        rotate: index % 2 === 0 ? 5 : -5,
-                        filter: "blur(4px)",
-                        transition: { duration: 0.35, ease: "easeInOut" }
-                      }}
-                      className="absolute inset-0 bg-gradient-to-br from-pink-300 via-purple-300 to-pink-400 flex flex-col items-center justify-center z-10 p-4"
-                    >
-                      {/* Scratch ticket diagonal stripes texture */}
-                      <div className="absolute inset-0 opacity-15 bg-[linear-gradient(45deg,rgba(255,255,255,0.4)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.4)_50%,rgba(255,255,255,0.4)_75%,transparent_75%,transparent)] bg-[length:16px_16px]" />
-                      
-                      <motion.div 
-                        className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center mb-1 shadow-inner z-20"
-                        animate={{ scale: [1, 1.08, 1] }}
-                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                      >
-                        <Heart className="text-white fill-white" size={14} />
-                      </motion.div>
-                      <span className="text-[9px] text-white font-extrabold tracking-widest uppercase z-20">
-                        Scratch ♡
-                      </span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                </ScratchCard>
               </motion.div>
             );
           })}
@@ -169,4 +139,5 @@ export function Scene6Reasons({ onNext }: SceneProps) {
     </div>
   );
 }
+
 

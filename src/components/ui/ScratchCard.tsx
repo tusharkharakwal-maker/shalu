@@ -1,167 +1,176 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 interface ScratchCardProps {
   children: React.ReactNode;
-  onReveal?: () => void;
-  revealThreshold?: number; // 0-100 percentage
+  onScratchComplete?: () => void;
+  brushSize?: number;
+  finishPercent?: number;
+  isRevealed?: boolean;
 }
 
 export function ScratchCard({
   children,
-  onReveal,
-  revealThreshold = 60,
+  onScratchComplete,
+  brushSize = 25,
+  finishPercent = 40,
+  isRevealed = false,
 }: ScratchCardProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isRevealed, setIsRevealed] = useState(false);
-  const [isDrawing, setIsDrawing] = useState(false);
+  const [isScratched, setIsScratched] = useState(false);
+  const isDrawing = useRef(false);
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null);
+  const frameCount = useRef(0);
+
+  useEffect(() => {
+    if (isRevealed && !isScratched) {
+      setIsScratched(true);
+      if (onScratchComplete) onScratchComplete();
+    }
+  }, [isRevealed, isScratched, onScratchComplete]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
 
-    const ctx = canvas.getContext("2d");
+    // Set canvas resolution to match pixel density for sharpness, 
+    // but keep logic simple with bounding rect.
+    const rect = container.getBoundingClientRect();
+    // Use scale 1 for simplicity in mapping pointer events to canvas pixels
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
+    ctxRef.current = ctx;
 
-    const resizeCanvas = () => {
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
-      
-      // Fill with soft gray overlay
-      ctx.fillStyle = "#e5e7eb"; // tailwind gray-200
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Add text
-      ctx.font = "20px 'Quicksand', sans-serif";
-      ctx.fillStyle = "#9ca3af"; // tailwind gray-400
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText("scratch me ♡", canvas.width / 2, canvas.height / 2);
-    };
+    // 1. Draw Background Gradient
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#f9a8d4"); // pink-300
+    gradient.addColorStop(0.5, "#d8b4fe"); // purple-300
+    gradient.addColorStop(1, "#f472b6"); // pink-400
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, [isRevealed]); // re-run if it was not revealed and somehow needs resize, but usually we just remove canvas once revealed
-
-  const calculateScratchedPercentage = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-    const pixels = ctx.getImageData(0, 0, width, height).data;
-    let transparentPixels = 0;
-    for (let i = 3; i < pixels.length; i += 4) {
-      if (pixels[i] === 0) transparentPixels++;
-    }
-    const totalPixels = width * height;
-    return (transparentPixels / totalPixels) * 100;
-  };
-
-  const scratch = (e: React.MouseEvent | React.TouchEvent | MouseEvent | TouchEvent) => {
-    if (isRevealed) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const rect = canvas.getBoundingClientRect();
-    let clientX, clientY;
-
-    if ('touches' in e) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
-    } else {
-      clientX = (e as React.MouseEvent).clientX;
-      clientY = (e as React.MouseEvent).clientY;
+    // 2. Draw Diagonal Stripes
+    ctx.lineWidth = 16;
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
+    for (let i = -canvas.height; i < canvas.width; i += 32) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i + canvas.height, canvas.height);
+      ctx.stroke();
     }
 
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
-
-    ctx.globalCompositeOperation = "destination-out";
+    // 3. Draw Center Circle
+    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
     ctx.beginPath();
-    ctx.arc(x, y, 20, 0, Math.PI * 2);
+    ctx.arc(canvas.width / 2, canvas.height / 2 - 8, 18, 0, Math.PI * 2);
     ctx.fill();
 
-    // Check percentage every few frames to save performance
-    if (Math.random() > 0.8) {
-      const percentage = calculateScratchedPercentage(ctx, canvas.width, canvas.height);
-      if (percentage > revealThreshold) {
-        setIsRevealed(true);
-        if (onReveal) onReveal();
-      }
-    }
+    // 4. Draw Heart and Text
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "900 10px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("SCRATCH", canvas.width / 2, canvas.height / 2 + 15);
+    ctx.font = "16px sans-serif";
+    ctx.fillText("♡", canvas.width / 2, canvas.height / 2 - 6);
+
+    // Set composition mode to erase for future strokes
+    ctx.globalCompositeOperation = "destination-out";
+  }, []);
+
+  const scratch = (x: number, y: number) => {
+    const ctx = ctxRef.current;
+    if (!ctx || isScratched) return;
+
+    ctx.beginPath();
+    ctx.arc(x, y, brushSize, 0, Math.PI * 2);
+    ctx.fill();
   };
 
-  const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
-    setIsDrawing(true);
-    scratch(e);
-  };
-
-  const handlePointerMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (isDrawing) {
-      scratch(e);
-      // Prevent scrolling while scratching
-      if (e.cancelable) e.preventDefault();
-    }
-  };
-
-  const handlePointerUp = () => {
-    setIsDrawing(false);
-  };
-
-  useEffect(() => {
-    // We need non-passive event listeners for touchmove to prevent scrolling
+  const checkPercent = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const touchMoveHandler = (e: TouchEvent) => {
-      if (isDrawing && e.cancelable) {
-        e.preventDefault();
+    const ctx = ctxRef.current;
+    if (!canvas || !ctx || isScratched) return;
+
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let transparentPixels = 0;
+    const totalPixels = pixels.length / 4;
+    const stride = 10; // sample every 10th pixel
+
+    for (let i = 3; i < pixels.length; i += 4 * stride) {
+      if (pixels[i] < 128) {
+        transparentPixels++;
       }
-    };
+    }
+
+    const percent = (transparentPixels / (totalPixels / stride)) * 100;
     
-    canvas.addEventListener('touchmove', touchMoveHandler, { passive: false });
-    return () => canvas.removeEventListener('touchmove', touchMoveHandler);
-  }, [isDrawing]);
+    if (percent > finishPercent) {
+      setIsScratched(true);
+      if (onScratchComplete) onScratchComplete();
+    }
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (isScratched) return;
+    isDrawing.current = true;
+    const canvas = e.currentTarget as HTMLCanvasElement;
+    canvas.setPointerCapture(e.pointerId);
+    const rect = canvas.getBoundingClientRect();
+    scratch(e.clientX - rect.left, e.clientY - rect.top);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDrawing.current || isScratched) return;
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (rect) {
+      scratch(e.clientX - rect.left, e.clientY - rect.top);
+      frameCount.current++;
+      if (frameCount.current % 5 === 0) {
+        checkPercent();
+      }
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    isDrawing.current = false;
+    const canvas = e.currentTarget as HTMLCanvasElement;
+    canvas.releasePointerCapture(e.pointerId);
+    checkPercent(); // Check one last time on release
+  };
 
   return (
     <div 
       ref={containerRef} 
-      className="relative w-full h-full rounded-2xl overflow-hidden glass-panel"
+      className="relative w-full h-full select-none"
+      style={{ touchAction: "none" }}
     >
-      {/* Content to reveal */}
-      <div className="absolute inset-0 flex items-center justify-center p-4 text-center">
+      {/* Content underneath */}
+      <div 
+        className={`w-full h-full transition-all duration-700 ease-out ${
+          isScratched ? "opacity-100 scale-100 filter-none" : "opacity-40 scale-95 blur-[2px]"
+        }`}
+      >
         {children}
-        <AnimatePresence>
-          {isRevealed && (
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: [1.2, 1], opacity: 1 }}
-              className="absolute inset-0 pointer-events-none flex items-center justify-center"
-            >
-              {/* Confetti/sparkle effect placeholder */}
-              <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-100/50 via-transparent to-transparent opacity-50" />
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {/* Canvas Overlay */}
-      {!isRevealed && (
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 cursor-pointer touch-none z-10"
-          onMouseDown={handlePointerDown}
-          onMouseMove={handlePointerMove}
-          onMouseUp={handlePointerUp}
-          onMouseLeave={handlePointerUp}
-          onTouchStart={handlePointerDown}
-          onTouchMove={handlePointerMove}
-          onTouchEnd={handlePointerUp}
-        />
-      )}
+      <canvas
+        ref={canvasRef}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        className={`absolute inset-0 w-full h-full cursor-crosshair transition-opacity duration-700 ease-in-out z-10 ${
+          isScratched ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      />
     </div>
   );
 }
