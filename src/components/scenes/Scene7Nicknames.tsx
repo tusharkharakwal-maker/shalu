@@ -33,7 +33,7 @@ export function Scene7Nicknames({ onNext }: SceneProps) {
 
       <div className="grid grid-cols-2 gap-4 w-full mb-10 aspect-square">
         {nicknames.map((nickname, idx) => (
-          <ScratchCard key={idx} onReveal={handleReveal} revealThreshold={50}>
+          <ScratchCard key={idx} onScratchComplete={handleReveal} finishPercent={50}>
             <p className="font-script text-3xl font-bold text-primary leading-tight transform -rotate-6">
               {nickname}
             </p>
