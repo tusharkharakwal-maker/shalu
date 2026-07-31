@@ -10,12 +10,11 @@ import { Scene3StoryStart } from "@/components/scenes/Scene3StoryStart";
 import { Scene4StoryUs } from "@/components/scenes/Scene4StoryUs";
 import { Scene5Carousel } from "@/components/scenes/Scene5Carousel";
 import { Scene6Reasons } from "@/components/scenes/Scene6Reasons";
-import { Scene7Nicknames } from "@/components/scenes/Scene7Nicknames";
 import { Scene8Video } from "@/components/scenes/Scene8Video";
 import { Scene9Quiz } from "@/components/scenes/Scene9Quiz";
 import { Scene10Letter } from "@/components/scenes/Scene10Letter";
 
-const TOTAL_SCENES = 10;
+const TOTAL_SCENES = 9;
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
@@ -43,7 +42,6 @@ export default function StoryContainer() {
     <Scene4StoryUs key="s4" onNext={handleNext} />,
     <Scene5Carousel key="s5" onNext={handleNext} />,
     <Scene6Reasons key="s6" onNext={handleNext} />,
-    <Scene7Nicknames key="s7" onNext={handleNext} />,
     <Scene8Video key="s8" onNext={handleNext} />,
     <Scene9Quiz key="s9" onNext={handleNext} />,
     <Scene10Letter key="s10" onNext={handleNext} />,
@@ -57,7 +55,7 @@ export default function StoryContainer() {
       <motion.div
         className="flex-1 relative w-full h-full outline-none"
         drag="x"
-        dragListener={![4, 5, 6].includes(sceneIndex)}
+        dragListener={![4, 5].includes(sceneIndex)}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={1}
         onDragEnd={(e, { offset, velocity }) => {
