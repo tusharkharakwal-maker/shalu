@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PillTag } from "@/components/ui/PillTag";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { Play } from "lucide-react";
+import Image from "next/image";
 
 interface SceneProps {
   onNext: () => void;
@@ -30,10 +31,13 @@ export function Scene8Video({ onNext }: SceneProps) {
             className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden shadow-xl mb-6 cursor-pointer bg-slate-200 border-2 border-white"
             onClick={() => setIsPlaying(true)}
           >
-            {/* Thumbnail Placeholder */}
-            <div className="absolute inset-0 bg-pink-100 flex items-center justify-center text-pink-400 font-medium text-lg tracking-wide">
-              Click to Play
-            </div>
+            <Image
+              src="/media/video-01-thumb.jpg"
+              alt="Video thumbnail"
+              fill
+              className="object-cover"
+              unoptimized={true}
+            />
 
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center transition-colors hover:bg-black/30">
               <div className="w-16 h-16 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center animate-pulse">
