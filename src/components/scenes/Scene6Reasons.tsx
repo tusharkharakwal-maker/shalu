@@ -13,9 +13,9 @@ interface SceneProps {
 
 const reasons = [
   { image: "/cat1.png", text: "you feel like home", scale: "scale-[1.8]" },
-  { image: "/cat2.png", text: "your laugh is my favourite sound", scale: "scale-[1.2]" },
+  { image: "/cat2.png", text: "your laugh is my favourite sound", scale: "scale-[1.6]" },
   { image: "/cat3.png", text: "you make ordinary days magic", scale: "scale-[1.8]" },
-  { image: "/cat4.png", text: "you're my calm and my spark", scale: "scale-[1.2]" },
+  { image: "/cat4.png", text: "you're my calm and my spark", scale: "scale-[1.6]" },
   { image: "/cat5.png", text: "you make me want to be better", scale: "scale-[1.5]" },
   { image: "/cat6.png", text: "it's you. it's always you.", scale: "scale-[1.5]" },
 ];
@@ -93,11 +93,11 @@ export function Scene6Reasons({ onNext }: SceneProps) {
                   finishPercent={40}
                   brushSize={25}
                 >
-                  <div className="flex flex-col items-center justify-center gap-1 p-2 w-full h-full bg-white">
+                  <div className="flex flex-col items-center justify-center gap-1 p-2 w-full h-full bg-white relative">
                     <div className="relative w-24 h-24 flex items-center justify-center">
-                      <Image src={reason.image} alt="sticker" fill sizes="96px" className={`object-contain drop-shadow-sm ${reason.scale || ""}`} />
+                      <Image src={reason.image} alt="sticker" fill sizes="96px" className={`object-contain drop-shadow-sm origin-bottom ${reason.scale || ""}`} />
                     </div>
-                    <p className="text-[10px] font-bold text-slate-700 leading-tight">
+                    <p className="text-[10px] font-bold text-slate-700 leading-tight z-10 relative bg-white/80 backdrop-blur-[2px] px-1 py-0.5 rounded text-center max-w-full">
                       {reason.text}
                     </p>
                   </div>
