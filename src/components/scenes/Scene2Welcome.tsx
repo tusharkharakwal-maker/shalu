@@ -24,10 +24,11 @@ export function Scene2Welcome({ onNext }: SceneProps) {
         <div className="w-32 h-32 mb-6 relative rounded-full p-1 bg-gradient-to-tr from-pink-300 to-purple-300 shadow-lg shadow-purple-200">
           <div className="w-full h-full relative rounded-full overflow-hidden border-2 border-white bg-pink-50">
             <Image
-              src="/media/scene2-top.jpg"
+              src="/media/scene2-top.png"
               alt="Us"
               fill
               className="object-cover"
+              unoptimized={true}
               onError={(e) => (e.currentTarget.style.display = 'none')}
             />
           </div>
